@@ -1,12 +1,6 @@
 Shader "Custom/Shader"
 {
-    Properties
-    {
-        _Color ("Color", Color) = (1,1,1,1)
-        _MainTex ("Albedo (RGB)", 2D) = "white" {}
-        _Glossiness ("Smoothness", Range(0,1)) = 0.5
-        _Metallic ("Metallic", Range(0,1)) = 0.0
-    }
+    Properties {}
     SubShader
     {
         Tags
@@ -48,10 +42,32 @@ Shader "Custom/Shader"
                 return i;
             }
 
+            float3 palette(float t)
+            {
+                float3 a = float3(0.500, 0.500, 0.500);
+                float3 b = float3(0.666, 0.666, 0.666);
+                float3 c = float3(1.000, 1.000, 1.000);
+                float3 d = float3(0.000, 0.333, 0.667);
+                return a + b * cos(6.28318 * (c * t + d));
+            }
+
             float4 fp(v2f i) : SV_TARGET
             {
+                float2 uv = i.uv;
                 
-                return float4(i.uv, 1, 1);
+                uv = (uv - 0.5) * 2;
+                float2 uv0 = uv;
+                uv *= 2;
+                uv = frac(uv);
+                uv = (uv - 0.5);
+
+                float d = length(uv);
+                float3 tint = palette(length(uv0) + _Time * 10);
+                d = sin(d * 5 + _Time * 20) / 5;
+                d = abs(d);
+                d = 0.01 / d;
+                tint *= d;
+                return float4(pow(tint, 2), 1);
             }
             ENDCG
         }
