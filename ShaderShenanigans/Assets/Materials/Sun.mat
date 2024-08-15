@@ -20,8 +20,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Grid
-  m_Shader: {fileID: 4800000, guid: d7ddbd1d4757b608a92c7761685c19c2, type: 3}
+  m_Name: Sun
+  m_Shader: {fileID: 4800000, guid: f034538f7576eb52592cc214eefec19f, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -117,7 +117,7 @@ Material:
     - _GridSize: 6.13
     - _LaneWidth: 0.12
     - _Line: 173.4
-    - _LineWidth: 0.084
+    - _LineWidth: 0.037
     - _Metallic: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.005
@@ -135,7 +135,8 @@ Material:
     - _ZWrite: 1
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
-    - _Color: {r: 0.8396226, g: 0.16237983, b: 0.5581022, a: 1}
+    - _Color: {r: 1, g: 0.46445, b: 0, a: 1}
+    - _Color1: {r: 0.14098358, g: 0, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _GridColor: {r: 0, g: 0, b: 0, a: 1}
     - _LaneColor: {r: 0.9019475, g: 0, b: 1, a: 1}

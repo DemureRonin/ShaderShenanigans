@@ -9,7 +9,10 @@ Shader "Custom/VaporwaveGrid"
     }
     SubShader
     {
-        Tags {"Queue" = "Overlay"}
+        Tags
+        {
+            "Queue" = "Overlay"
+        }
         Pass
         {
             CGPROGRAM
@@ -21,6 +24,7 @@ Shader "Custom/VaporwaveGrid"
             {
                 float4 vertex : POSITION;
             };
+
             struct v2f
             {
                 float4 pos : POSITION;
@@ -32,7 +36,7 @@ Shader "Custom/VaporwaveGrid"
             float4 _GridColor;
             float4 _LineColor;
 
-            v2f vert (appdata_t v)
+            v2f vert(appdata_t v)
             {
                 v2f o;
                 o.pos = UnityObjectToClipPos(v.vertex);
@@ -40,11 +44,16 @@ Shader "Custom/VaporwaveGrid"
                 return o;
             }
 
-            half4 frag (v2f i) : SV_Target
+            half4 frag(v2f i) : SV_Target
             {
                 float2 uv = i.uv;
-                uv.x += _Time *0.5;
+                float2 uv0 = uv;
+                uv0 = (uv0 - 0.5) * 2;
+                float d = length(uv0);
+                if (d > 0.4) discard;
+                uv.x += _Time * 0.5;
                 float2 grid = abs(frac(uv * 100) - 0.5);
+               
                 float lane = min(grid.x, grid.y);
                 lane = smoothstep(_LineWidth, _LineWidth * 0.5, lane);
                 lane = pow(lane, 2);
