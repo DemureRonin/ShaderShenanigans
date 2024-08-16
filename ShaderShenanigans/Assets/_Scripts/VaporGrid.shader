@@ -50,9 +50,8 @@ Shader "Custom/VaporwaveGrid"
                 float2 uv0 = uv;
                 uv0 = (uv0 - 0.5) * 2;
                 float d = length(uv0);
-                if (d > 0.4) discard;
-                uv.x += _Time * 0.5;
-                float2 grid = abs(frac(uv * 100) - 0.5);
+                uv.x += _Time * 30;
+                float2 grid = abs(frac(uv * 1) - 0.5);
                
                 float lane = min(grid.x, grid.y);
                 lane = smoothstep(_LineWidth, _LineWidth * 0.5, lane);
